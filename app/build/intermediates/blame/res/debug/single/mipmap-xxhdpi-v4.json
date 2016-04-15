@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/tomek/Warsztaty/Krakyournet2016/android/Kuchnia/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher.png",
+        "source": "/home/tomek/Warsztaty/Krakyournet2016/android/Kuchnia/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/tomek/git/Kuchnia/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher.png",
+        "source": "/home/tomek/git/Kuchnia/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    }
+]

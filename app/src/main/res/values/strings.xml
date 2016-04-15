@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Kuchnia</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="location">Nazwa kuchni</string>
+    <string name="creating_location">Stwórz kuchnię...</string>
+    <string name="waiter_connected">dołączył</string>
+    <string name="waiter_disconnected">wyszedł</string>
+    <string name="waiter_take"> zabierze</string>
+    <string name="error_empty">Uzupełnij</string>
+    <string name="error_disconnected">Brak dostępu do sieci</string>
+    <string name="error_already_addded">Już wydano</string>
+    <string name="kitchen_limit">Limit kuchni osiągnięty</string>
+    <string name="error">Błąd</string>
+    <string name="logout">Wyloguj</string>
+
+</resources>

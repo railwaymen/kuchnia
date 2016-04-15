@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi-v7a,armeabi"
+    api-level="23"
+    density="xxhdpi"
+    format="7"
+    timestamp="28642735599269" >
+
+    <task
+        name="javac"
+        duration="0" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="424" />
+    <task
+        name="verifier"
+        duration="30" />
+
+    <artifact
+        location="/home/tomek/Warsztaty/Krakyournet2016/android/Kuchnia/app/build/outputs/apk/app-debug.apk"
+        type="MAIN" />
+
+    <build timestamp="28642735599269" >
+        <artifact
+            location="/home/tomek/Warsztaty/Krakyournet2016/android/Kuchnia/app/build/outputs/apk/app-debug.apk"
+            type="MAIN" />
+    </build>
+
+</instant-run>
