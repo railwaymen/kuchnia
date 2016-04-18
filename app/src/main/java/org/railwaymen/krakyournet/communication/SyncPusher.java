@@ -41,7 +41,7 @@ public class SyncPusher {
 
 	private void subscribeChannel(String channelName) {
 		channel = pusher.subscribe(channelName);
-		for (String eventName : Constants.WISHLIST_EVENT_LIST) {
+		for (String eventName : Constants.PUSHER_EVENT_LIST) {
 			channel.bind(eventName, subscriptionEventListener);
 		}
 	}

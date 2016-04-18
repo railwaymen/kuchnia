@@ -27,7 +27,7 @@ public class Constants {
 
 	}
 
-	public static final List<String> WISHLIST_EVENT_LIST = new ArrayList<>();
+	public static final List<String> PUSHER_EVENT_LIST = new ArrayList<>();
 
 	public abstract class Event {
 		public static final String CONNECTED = "event_connected";
@@ -36,8 +36,8 @@ public class Constants {
 	}
 
 	static {
-		WISHLIST_EVENT_LIST.add(Event.CONNECTED);
-		WISHLIST_EVENT_LIST.add(Event.DISCONNECTED);
-		WISHLIST_EVENT_LIST.add(Event.TAKED);
+		PUSHER_EVENT_LIST.add(Event.CONNECTED);
+		PUSHER_EVENT_LIST.add(Event.DISCONNECTED);
+		PUSHER_EVENT_LIST.add(Event.TAKED);
 	}
 }
