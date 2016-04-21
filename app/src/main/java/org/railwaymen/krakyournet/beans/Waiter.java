@@ -1,19 +1,22 @@
-package org.railwaymen.krakyournet.model;
-
-import java.util.UUID;
+package org.railwaymen.krakyournet.beans;
 
 /**
  * Created by tomek on 03.04.16.
  */
 public class Waiter {
-	private UUID id;
+	private String id;
 	private String name;
 
-	public UUID getId() {
+	public Waiter(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -24,4 +27,5 @@ public class Waiter {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 }

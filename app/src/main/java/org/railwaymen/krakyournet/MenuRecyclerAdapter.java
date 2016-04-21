@@ -3,14 +3,14 @@ package org.railwaymen.krakyournet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import org.railwaymen.krakyournet.beans.MenuItem;
+
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import org.railwaymen.krakyournet.model.MenuItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,27 +38,28 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
 
 	@Override
 	public void onBindViewHolder(MenuHolder holder, int position) {
-		/*
-		 * MenuItem menuElement = hostActivity.getKitchen().getMenu().get(position);
-		 * holder.text.setText(menuElement.getName()); if (menuElement.isSelected()) {
-		 * holder.text.setTextColor(hostActivity.getResources().getColor(android.R.color.white));
-		 * holder.cardView
-		 * .setBackgroundColor(hostActivity.getResources().getColor(R.color.colorPrimary)); if
-		 * (menuElement.getTakeDate() != null) {
-		 * holder.dateText.setText(SIMPLE_DATE_FORMAT.format(menuElement.getTakeDate()));
-		 * holder.dateText.setVisibility(View.VISIBLE); } } else {
-		 * holder.text.setTextColor(hostActivity.getResources().getColor(R.color.colorPrimary));
-		 * holder.cardView.setBackgroundColor(
-		 * hostActivity.getResources().getColor(android.R.color.white));
-		 * holder.dateText.setVisibility(View.GONE); }
-		 */
+		MenuItem menuElement = hostActivity.getKitchen().getMenu().get(position);
+		holder.text.setText(menuElement.getName());
+		if (menuElement.isSelected()) {
+			holder.text.setTextColor(hostActivity.getResources().getColor(android.R.color.white));
+			holder.cardView
+					.setBackgroundColor(hostActivity.getResources().getColor(R.color.colorPrimary));
+			if (menuElement.getTakeDate() != null) {
+				holder.dateText.setText(SIMPLE_DATE_FORMAT.format(menuElement.getTakeDate()));
+				holder.dateText.setVisibility(View.VISIBLE);
+			}
+		} else {
+			holder.text.setTextColor(hostActivity.getResources().getColor(R.color.colorPrimary));
+			holder.cardView.setBackgroundColor(
+					hostActivity.getResources().getColor(android.R.color.white));
+			holder.dateText.setVisibility(View.GONE);
+		}
 
 	}
 
 	@Override
 	public int getItemCount() {
-		// hostActivity.getKitchen().getMenu().size();
-		return 0;
+		return hostActivity.getKitchen().getMenu().size();
 	}
 
 	public class MenuHolder extends RecyclerView.ViewHolder {

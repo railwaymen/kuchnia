@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.railwaymen.krakyournet.model.Kitchen;
+import org.railwaymen.krakyournet.beans.Kitchen;
 import org.railwaymen.krakyournet.communication.Endpoints;
 import org.railwaymen.krakyournet.communication.SyncPusher;
 
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private static Endpoints endpoints;
 	private Kitchen kitchen;
+	private SyncPusher syncPusher;
 	private RecyclerView.Adapter adapter;
 	private RecyclerView.LayoutManager layoutManager;
 
@@ -107,12 +108,39 @@ public class MainActivity extends AppCompatActivity {
 
 	@OnClick(R.id.progress_container)
 	public void registerLocation() {
-
+		if (!clicked) {
+			if (Utils.isDeviceConnected(this)) {
+				String name = kitchenName.getEditableText().toString();
+				if (Utils.isTextValid(name)) {
+					clicked = true;
+					progress.setVisibility(View.VISIBLE);
+					try {
+						Map<String, Object> map = new HashMap<>();
+						map.put(Constants.Keys.NAME, name);
+						map.put(Constants.Keys.DEVICE_ID, Utils.getDeviceId(this));
+						Call<Kitchen> call = getEndpoints().register(map);
+						call.enqueue(callback);
+					} catch (Exception e) {
+						Log.d(MainActivity.class.getSimpleName(), e.toString());
+						showSnackbar(getString(R.string.error));
+						progress.setVisibility(View.GONE);
+						clicked = false;
+					}
+				} else {
+					showSnackbar(R.string.error_empty);
+				}
+			} else {
+				showSnackbar(R.string.error_disconnected);
+			}
+		}
 	}
 
 	@OnClick(R.id.logout)
 	public void logout() {
-
+		if (kitchen != null) {
+			Call<Void> call = getEndpoints().removeKitchen(kitchen.getId());
+			call.enqueue(removeCallback);
+		}
 	}
 
 	public RecyclerView.Adapter getAdapter() {
@@ -128,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		if (syncPusher != null) {
+			syncPusher.disconnect();
+		}
 	}
 
 	private void buildMenu() {
@@ -143,5 +174,59 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
+	private Callback<Kitchen> callback = new Callback<Kitchen>() {
+		@Override
+		public void onResponse(Call<Kitchen> call, Response<Kitchen> response) {
+			if (response != null) {
+				switch (response.code()) {
+				case 200:
+					buttonLogout.setEnabled(true);
+					kitchen = response.body();
+					if (kitchen != null) {
+						getSupportActionBar().setTitle(kitchen.getName());
+						progress.setVisibility(View.INVISIBLE);
+						buildMenu();
+						syncPusher = new SyncPusher(MainActivity.this, kitchen.getId().toString());
+					}
+					break;
+				case 403:
+					progress.setVisibility(View.GONE);
+					showSnackbar(R.string.kitchen_limit);
+					break;
+				default:
+					break;
+				}
+			}
+			clicked = false;
+		}
 
+		@Override
+		public void onFailure(Call<Kitchen> call, Throwable t) {
+			clicked = false;
+			progress.setVisibility(View.INVISIBLE);
+		}
+	};
+	private Callback<Void> removeCallback = new Callback<Void>() {
+		@Override
+		public void onResponse(Call<Void> call, Response<Void> response) {
+			if (response != null) {
+				switch (response.code()) {
+				case 200:
+					if (syncPusher != null) {
+						syncPusher.disconnect();
+					}
+					buttonLogout.setEnabled(false);
+					progressContainer.setVisibility(View.VISIBLE);
+					recyclerView.setVisibility(View.GONE);
+					kitchen = null;
+					break;
+				}
+			}
+		}
+
+		@Override
+		public void onFailure(Call<Void> call, Throwable t) {
+			Log.e(MainActivity.class.getSimpleName(), t.toString());
+		}
+	};
 }

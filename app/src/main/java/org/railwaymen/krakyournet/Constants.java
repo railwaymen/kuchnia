@@ -7,14 +7,11 @@ import java.util.List;
  * Created by tomek on 01.04.16.
  */
 public class Constants {
-	// testing on localhost
-	public static final String HOST = "kuchnia-api-railwaymen.herokuapp.com";
-	public static final String API_URL = String.format("http://%s/api/", HOST);
+
+	public static final String API_URL = "http://kuchnia-api-railwaymen.herokuapp.com/api/";
 
 	public abstract class Pusher {
-		public static final String APP_ID = "195791";
 		public static final String APP_KEY = "be378fc6b685348ae04c";
-		public static final String SECRET = "6d6fb334363868e5bbcd";
 	}
 
 	public abstract class Keys {

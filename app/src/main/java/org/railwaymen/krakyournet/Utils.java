@@ -6,7 +6,7 @@ import java.util.UUID;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
-import org.railwaymen.krakyournet.model.MenuItem;
+import org.railwaymen.krakyournet.beans.MenuItem;
 import org.railwaymen.krakyournet.communication.Endpoints;
 
 import retrofit2.Retrofit;
@@ -24,7 +24,7 @@ import android.text.TextUtils;
 public class Utils {
 	public static int findMenuItemPosition(List<MenuItem> menuItemsList, UUID id) {
 		for (int i = 0; i < menuItemsList.size(); i++) {
-			if (menuItemsList.get(i).equals(id)) {
+			if (menuItemsList.get(i).getId().equals(id)) {
 				return i;
 			}
 		}

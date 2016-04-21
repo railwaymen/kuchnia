@@ -3,7 +3,7 @@ package org.railwaymen.krakyournet.communication;
 import java.util.Map;
 import java.util.UUID;
 
-import org.railwaymen.krakyournet.model.Kitchen;
+import org.railwaymen.krakyournet.beans.Kitchen;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
